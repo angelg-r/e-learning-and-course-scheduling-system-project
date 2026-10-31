@@ -2,7 +2,7 @@ import './App.css'
 import AboutGRTI from './pages/About'
 import ContactGRTI from './pages/Contact'
 import HomeGRTI from './pages/Home'
-import { Navigate, Route, Routes } from 'react-router'
+import { Route, Routes } from 'react-router'
 import NavigationBar from './components/NavigationBar/NavigationBar'
 
 function App() {
