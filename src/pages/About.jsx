@@ -1,8 +1,5 @@
-import React from 'react'
-
-const AboutGRTI = () => {
-    return null
-
+const About = () => {
+    return <div>About</div>
 }
 
-export default AboutGRTI
+export default About

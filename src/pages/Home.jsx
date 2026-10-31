@@ -1,8 +1,5 @@
-import React from 'react'
-
-const HomeGRTI = () => {
-    return null
-
+const Home = () => {
+    return <div>Home</div>
 }
 
-export default HomeGRTI
+export default Home

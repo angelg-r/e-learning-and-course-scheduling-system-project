@@ -1,7 +1,5 @@
-import React from 'react'
-
-const ContactGRTI = () => {
-    return null
+const Contact = () => {
+    return <div>Contact</div>
 }
 
-export default ContactGRTI
+export default Contact

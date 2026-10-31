@@ -1,0 +1,32 @@
+.site-nav {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.site-nav a {
+  border-radius: 0.65rem;
+  color: #405a74;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.65rem 0.9rem;
+  text-decoration: none;
+  transition: background-color 160ms ease, color 160ms ease, transform 160ms ease;
+}
+
+.site-nav a:hover,
+.site-nav a:focus-visible {
+  background: #edf5f8;
+  color: #087e8b;
+}
+
+.site-nav a:focus-visible {
+  outline: 2px solid #0b8793;
+  outline-offset: 2px;
+}
+
+.site-nav a.active {
+  background: #e6f4f4;
+  color: #087e8b;
+}
