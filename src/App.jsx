@@ -13,12 +13,13 @@ function App() {
         <h1>Good Responder Training Institute</h1>
         <NavigationBar />
       </header>
-      <Routes>
-        <Route path="/home" element={<HomeGRTI />} />
-        <Route path="/about" element={<AboutGRTI />} />
-        <Route path="/contact" element={<ContactGRTI />} />
-      </Routes>
-
+      <main className="page-content">
+        <Routes>
+          <Route path="/home" element={<HomeGRTI />} />
+          <Route path="/about" element={<AboutGRTI />} />
+          <Route path="/contact" element={<ContactGRTI />} />
+        </Routes>
+      </main>
     </div>
   )
 }
