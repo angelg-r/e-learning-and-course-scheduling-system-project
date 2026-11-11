@@ -56,6 +56,7 @@ function NavigationBar() {
         </ul>
       </details>
       <NavLink to="/goodrespondertraininginstitute/contact">Contact Us</NavLink>
+      <NavLink className="nav-login" to="/goodrespondertraininginstitute/login">Login</NavLink>
     </nav>
   )
 }

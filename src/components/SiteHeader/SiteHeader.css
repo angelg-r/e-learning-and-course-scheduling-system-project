@@ -18,6 +18,21 @@
     line-height: 1.2;
 }
 
+.site-header h1 a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.site-header h1 a:hover,
+.site-header h1 a:focus-visible {
+    color: #087e8b;
+}
+
+.site-header h1 a:focus-visible {
+    outline: 2px solid #087e8b;
+    outline-offset: 4px;
+}
+
 @media (max-width: 980px) {
     .site-header {
         align-items: flex-start;

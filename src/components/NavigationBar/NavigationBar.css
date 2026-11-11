@@ -32,6 +32,21 @@
   border-radius: 0.4rem;
 }
 
+.site-nav .nav-login {
+  min-height: 2.75rem;
+  padding: 0.65rem 1.1rem;
+  border-radius: 999px;
+  background: #111;
+  color: #fff;
+  font-weight: 600;
+}
+
+.site-nav .nav-login:hover,
+.site-nav .nav-login:focus-visible {
+  background: #087e8b;
+  color: #fff;
+}
+
 .site-nav .nav-dropdown {
   min-height: 2.75rem;
   padding: 0.55rem 1rem;
