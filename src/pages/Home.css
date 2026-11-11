@@ -1,0 +1,116 @@
+.home-sections {
+    width: 100%;
+}
+
+.home-section {
+    display: flex;
+    align-items: center;
+    min-height: clamp(32rem, 68vh, 48rem);
+    padding: 4rem 0;
+}
+
+.home-section-inner {
+    display: grid;
+    grid-template-columns: minmax(5rem, 0.35fr) minmax(0, 1fr);
+    gap: clamp(2rem, 8vw, 8rem);
+    align-items: start;
+    width: min(100%, 1100px);
+    margin: 0 auto;
+    padding: 0 clamp(1.25rem, 5vw, 3rem);
+}
+
+.home-section-index {
+    margin: 0.55rem 0 0;
+    font-size: 0.8rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+}
+
+.home-section-copy {
+    max-width: 46rem;
+}
+
+.home-section-copy h2 {
+    max-width: 14ch;
+    margin: 0 0 1.25rem;
+    font-size: clamp(2.4rem, 6vw, 5rem);
+    font-weight: 600;
+    line-height: 1.05;
+}
+
+.home-section-copy>p {
+    max-width: 42rem;
+    margin: 0;
+    font-size: clamp(1rem, 1.5vw, 1.2rem);
+    line-height: 1.7;
+}
+
+.home-section--black {
+    background: #111;
+    color: #fff;
+}
+
+.home-section--white {
+    background: #fff;
+    color: #111;
+}
+
+.home-section--gray {
+    background: #707070;
+    color: #fff;
+}
+
+.home-training-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin: 1.75rem 0 0;
+    padding: 0;
+    list-style: none;
+}
+
+.home-training-options li {
+    padding: 0.55rem 0.8rem;
+    border: 1px solid currentColor;
+    font-size: 0.9rem;
+}
+
+.home-contact-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.8rem;
+    margin-top: 1.75rem;
+    padding: 0.6rem 1rem;
+    border: 1px solid currentColor;
+    color: inherit;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.home-contact-link:hover,
+.home-contact-link:focus-visible {
+    background: #fff;
+    color: #111;
+}
+
+.home-contact-link:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 3px;
+}
+
+@media (max-width: 640px) {
+    .home-section {
+        min-height: 75vh;
+        padding: 3.5rem 0;
+    }
+
+    .home-section-inner {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .home-section-copy h2 {
+        font-size: clamp(2.4rem, 11vw, 4rem);
+    }
+}

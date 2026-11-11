@@ -21,8 +21,8 @@
 
 .site-nav a:hover,
 .site-nav a:focus-visible,
-.training-modes-menu summary:hover,
-.training-modes-menu summary:focus-visible {
+.nav-dropdown-menu summary:hover,
+.nav-dropdown-menu summary:focus-visible {
   color: #087e8b;
 }
 
@@ -39,24 +39,25 @@
   border-radius: 999px;
 }
 
-.training-modes-menu {
+.nav-dropdown-menu {
   position: relative;
 }
 
-.training-modes-menu summary {
+.nav-dropdown-menu summary {
   cursor: pointer;
   list-style: none;
 }
 
-.training-modes-menu summary::-webkit-details-marker {
+.nav-dropdown-menu summary::-webkit-details-marker {
   display: none;
 }
 
-.training-mode-options {
+.dropdown-options {
   position: absolute;
   z-index: 2;
   top: calc(100% + 0.65rem);
-  right: 0;
+  left: 0;
+  display: none;
   min-width: 12rem;
   margin: 0;
   padding: 0.4rem 0;
@@ -68,11 +69,19 @@
   list-style: none;
 }
 
-.training-mode-options li {
+.nav-dropdown-menu:hover>.dropdown-options,
+.nav-dropdown-menu:focus-within>.dropdown-options,
+.nav-dropdown-menu[open]>.dropdown-options {
+  display: block;
+}
+
+.dropdown-options li {
   padding: 0.15rem 0.4rem;
 }
 
-.training-mode-options button {
+.dropdown-options a,
+.dropdown-options button {
+  display: block;
   width: 100%;
   padding: 0.6rem 0.65rem;
   border: 0;
@@ -86,15 +95,19 @@
   white-space: nowrap;
 }
 
-.training-mode-options button:hover,
-.training-mode-options button:focus-visible,
-.training-mode-options button[aria-pressed='true'] {
+.dropdown-options a:hover,
+.dropdown-options a:focus-visible,
+.dropdown-options button:hover,
+.dropdown-options button:focus-visible,
+.dropdown-options button[aria-pressed='true'] {
   background: #f3f6f7;
 }
 
-.training-mode-options button:focus-visible {
+.dropdown-options a:focus-visible,
+.dropdown-options button:focus-visible {
   outline: 2px solid #087e8b;
   outline-offset: -2px;
+  border-radius: 0.35rem;
 }
 
 .dropdown-icon {

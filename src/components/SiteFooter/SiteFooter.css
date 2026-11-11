@@ -1,0 +1,9 @@
+.site-footer {
+    display: flex;
+    justify-content: center;
+    padding: 1.25rem clamp(1.25rem, 5vw, 4rem);
+    border-top: 1px solid #e1e5e9;
+    background: #f3f3f3;
+    color: #555;
+    text-align: center;
+}
