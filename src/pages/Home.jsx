@@ -1,4 +1,4 @@
-import './Home.css'
+import './ContentSections.css'
 import { NavLink } from 'react-router'
 
 const homeSections = [
@@ -42,19 +42,19 @@ const homeSections = [
 ]
 
 const Home = () => (
-    <div className="home-sections">
+    <div className="content-sections">
         {homeSections.map(({ tone, title, body, options, contactLink }, index) => {
             const headingId = `home-section-${index + 1}`
 
             return (
                 <section
-                    className={`home-section home-section--${tone}`}
+                    className={`content-section content-section--${tone}`}
                     key={headingId}
                     aria-labelledby={headingId}
                 >
-                    <div className="home-section-inner">
-                        <p className="home-section-index">{String(index + 1).padStart(2, '0')} / 07</p>
-                        <div className="home-section-copy">
+                    <div className="content-section-inner">
+                        <p className="content-section-index">{String(index + 1).padStart(2, '0')} / 07</p>
+                        <div className="content-section-copy">
                             <h2 id={headingId}>{title}</h2>
                             <p>{body}</p>
                             {options && (

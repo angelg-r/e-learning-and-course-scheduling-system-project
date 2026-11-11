@@ -1,15 +1,15 @@
-.home-sections {
+.content-sections {
     width: 100%;
 }
 
-.home-section {
+.content-section {
     display: flex;
     align-items: center;
     min-height: clamp(32rem, 68vh, 48rem);
     padding: 4rem 0;
 }
 
-.home-section-inner {
+.content-section-inner {
     display: grid;
     grid-template-columns: minmax(5rem, 0.35fr) minmax(0, 1fr);
     gap: clamp(2rem, 8vw, 8rem);
@@ -19,18 +19,18 @@
     padding: 0 clamp(1.25rem, 5vw, 3rem);
 }
 
-.home-section-index {
+.content-section-index {
     margin: 0.55rem 0 0;
     font-size: 0.8rem;
     font-weight: 600;
     letter-spacing: 0.08em;
 }
 
-.home-section-copy {
+.content-section-copy {
     max-width: 46rem;
 }
 
-.home-section-copy h2 {
+.content-section-copy h2 {
     max-width: 14ch;
     margin: 0 0 1.25rem;
     font-size: clamp(2.4rem, 6vw, 5rem);
@@ -38,24 +38,24 @@
     line-height: 1.05;
 }
 
-.home-section-copy>p {
+.content-section-copy>p {
     max-width: 42rem;
     margin: 0;
     font-size: clamp(1rem, 1.5vw, 1.2rem);
     line-height: 1.7;
 }
 
-.home-section--black {
+.content-section--black {
     background: #111;
     color: #fff;
 }
 
-.home-section--white {
+.content-section--white {
     background: #fff;
     color: #111;
 }
 
-.home-section--gray {
+.content-section--gray {
     background: #707070;
     color: #fff;
 }
@@ -100,17 +100,17 @@
 }
 
 @media (max-width: 640px) {
-    .home-section {
+    .content-section {
         min-height: 75vh;
         padding: 3.5rem 0;
     }
 
-    .home-section-inner {
+    .content-section-inner {
         grid-template-columns: 1fr;
         gap: 1.5rem;
     }
 
-    .home-section-copy h2 {
+    .content-section-copy h2 {
         font-size: clamp(2.4rem, 11vw, 4rem);
     }
 }
