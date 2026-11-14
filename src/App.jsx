@@ -2,7 +2,7 @@ import './App.css'
 import ContactGRTI from './pages/Contact'
 import HomeGRTI from './pages/Home'
 import Login from './pages/Login'
-import { Route, Routes } from 'react-router'
+import { Navigate, Route, Routes } from 'react-router'
 import SiteHeader from './components/SiteHeader/SiteHeader'
 import SiteFooter from './components/SiteFooter/SiteFooter'
 
@@ -13,6 +13,7 @@ function App() {
       <SiteHeader />
       <main className="page-content">
         <Routes>
+          <Route path="/" element={<Navigate to="/goodrespondertraininginstitute/home" replace />} />
           <Route path="goodrespondertraininginstitute/home" element={<HomeGRTI />} />
           <Route path="goodrespondertraininginstitute/contact" element={<ContactGRTI />} />
           <Route path="goodrespondertraininginstitute/login" element={<Login />} />

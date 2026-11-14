@@ -84,6 +84,15 @@
   list-style: none;
 }
 
+.dropdown-options::before {
+  position: absolute;
+  right: 0;
+  bottom: 100%;
+  left: 0;
+  height: 0.65rem;
+  content: '';
+}
+
 .nav-dropdown-menu:hover>.dropdown-options,
 .nav-dropdown-menu:focus-within>.dropdown-options,
 .nav-dropdown-menu[open]>.dropdown-options {
