@@ -1,0 +1,6 @@
+﻿MongoDB Compass/
+**/node_modules/
+**/dist/
+**/.env
+**/*.local
+**/Node.js/

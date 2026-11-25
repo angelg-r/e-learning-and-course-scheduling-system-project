@@ -1,0 +1,117 @@
+.site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: #fff;
+    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 2px 12px rgba(24, 59, 86, 0.05);
+}
+
+.site-header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+    min-height: 4.75rem;
+    padding: 0.55rem clamp(1.25rem, 4vw, 3.5rem);
+}
+
+.site-brand-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-shrink: 0;
+}
+
+.site-brand {
+    display: inline-flex;
+    align-items: center;
+    text-decoration: none;
+    border-radius: 0.5rem;
+    transition: opacity 160ms ease, transform 160ms ease;
+}
+
+.site-brand:hover {
+    opacity: 0.92;
+    transform: scale(1.01);
+}
+
+.site-brand:focus-visible {
+    outline: 2px solid #087e8b;
+    outline-offset: 4px;
+}
+
+.site-brand-logo {
+    display: block;
+    height: 3.35rem;
+    width: auto;
+    max-width: 16rem;
+    object-fit: contain;
+    mix-blend-mode: multiply;
+}
+
+.mobile-menu-toggle {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+    border: 1px solid #d5d9df;
+    border-radius: 0.55rem;
+    background: #fff;
+    color: #183b56;
+    cursor: pointer;
+    transition: background-color 150ms ease, border-color 150ms ease;
+}
+
+.mobile-menu-toggle:hover {
+    background: #f3f6f7;
+    border-color: #087e8b;
+    color: #087e8b;
+}
+
+.hamburger-lines {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 1.15rem;
+}
+
+.hamburger-lines span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    border-radius: 999px;
+    background: currentColor;
+    transition: transform 200ms ease, opacity 200ms ease;
+}
+
+.mobile-menu-toggle[aria-expanded='true'] .hamburger-lines span:nth-child(1) {
+    transform: translateY(6px) rotate(45deg);
+}
+
+.mobile-menu-toggle[aria-expanded='true'] .hamburger-lines span:nth-child(2) {
+    opacity: 0;
+}
+
+.mobile-menu-toggle[aria-expanded='true'] .hamburger-lines span:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg);
+}
+
+@media (max-width: 1120px) {
+    .site-header-inner {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+    }
+
+    .mobile-menu-toggle {
+        display: inline-flex;
+    }
+
+    .site-brand-logo {
+        height: 2.75rem;
+    }
+}
