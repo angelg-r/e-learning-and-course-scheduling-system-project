@@ -1,0 +1,140 @@
+.portal-shell {
+    display: grid;
+    grid-template-columns: 16.5rem minmax(0, 1fr);
+    gap: 1.75rem;
+    align-items: stretch;
+    box-sizing: border-box;
+    width: 100%;
+    min-height: calc(100vh - 11rem);
+    margin: 0;
+    padding: 1.75rem clamp(1.25rem, 4vw, 3.5rem) 2.5rem;
+    background: #f8fafc;
+}
+
+.portal-sidebar {
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 1.35rem;
+    border: 1px solid #e8edf1;
+    border-radius: 0.75rem;
+    background: #fff;
+}
+
+.portal-role-badge {
+    align-self: flex-start;
+    margin-bottom: 0.6rem;
+    padding: 0.25rem 0.7rem;
+    border-radius: 999px;
+    background: #e6f4f5;
+    color: #087e8b;
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.portal-sidebar-title {
+    margin: 0 0 0.25rem;
+    color: #183b56;
+    font-size: 1.15rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.portal-user-meta {
+    margin: 0 0 1.25rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e8edf1;
+    color: #5b6e80;
+    font-size: 0.85rem;
+    line-height: 1.4;
+}
+
+.portal-user-meta strong {
+    color: #183b56;
+    font-weight: 600;
+}
+
+.portal-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.35rem;
+}
+
+.portal-nav a {
+    display: block;
+    padding: 0.65rem 0.9rem;
+    border-radius: 0.5rem;
+    color: #344b5e;
+    font-size: 0.9rem;
+    font-weight: 500;
+    line-height: 1.35;
+    text-decoration: none;
+    transition: background-color 150ms ease, color 150ms ease;
+}
+
+.portal-nav a:hover {
+    background: #f3f6f7;
+    color: #087e8b;
+}
+
+.portal-nav a:focus-visible {
+    outline: 2px solid #087e8b;
+    outline-offset: 2px;
+}
+
+.portal-nav a.active {
+    background: #087e8b;
+    color: #fff;
+    font-weight: 600;
+}
+
+.portal-main {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+}
+
+.module-container {
+    flex: 1;
+    box-sizing: border-box;
+    padding: 1.75rem 2rem;
+    border: 1px solid #e8edf1;
+    border-radius: 0.75rem;
+    background: #fff;
+}
+
+.module-container h1 {
+    margin: 0 0 0.5rem;
+    padding-bottom: 0.9rem;
+    border-bottom: 1px solid #e8edf1;
+    color: #183b56;
+    font-size: 1.45rem;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.module-container p {
+    margin: 0.9rem 0 1.25rem;
+    color: #344b5e;
+    font-size: 0.96rem;
+    line-height: 1.6;
+}
+
+@media (max-width: 900px) {
+    .portal-shell {
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+        min-height: auto;
+    }
+
+    .portal-nav {
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .module-container {
+        padding: 1.35rem;
+    }
+}

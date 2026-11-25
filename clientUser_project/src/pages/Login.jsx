@@ -1,16 +1,18 @@
-
 import { useState } from 'react'
+import { useNavigate } from 'react-router'
+import { getPortalPath, useAuth } from '../context/authUtils'
 import './Login.css'
 
 function Login() {
     const [notice, setNotice] = useState('')
     const [loading, setLoading] = useState(false)
+    const { loginUser } = useAuth()
+    const navigate = useNavigate()
 
     const handleSubmit = async (event) => {
         event.preventDefault()
 
         const formData = new FormData(event.currentTarget)
-
         const email = formData.get('email')
         const password = formData.get('password')
 
@@ -32,7 +34,8 @@ function Login() {
                 throw new Error(data.message || 'Login failed. Please check your details.')
             }
 
-            setNotice(data.message || 'Login successful!')
+            loginUser(data.user)
+            navigate(getPortalPath(data.user?.role))
         } catch (error) {
             setNotice(error.message || 'Unable to connect to the server.')
         } finally {

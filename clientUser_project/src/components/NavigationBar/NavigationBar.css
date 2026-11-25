@@ -1,23 +1,29 @@
-
 .site-nav {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: clamp(0.65rem, 1.8vw, 1.5rem);
+  gap: clamp(0.55rem, 1.2vw, 1.1rem);
   min-width: 0;
+  flex: 1;
 }
 
 .site-nav a,
+.site-nav button.nav-login,
+.site-nav button.nav-signup,
 .nav-label {
   display: inline-flex;
   align-items: center;
-  gap: 0.55rem;
+  justify-content: center;
+  gap: 0.5rem;
+  box-sizing: border-box;
   color: #17202a;
-  font-size: 0.9rem;
+  font-family: inherit;
+  font-size: 0.88rem;
   font-weight: 500;
+  line-height: 1;
   white-space: nowrap;
   text-decoration: none;
-  transition: color 160ms ease;
+  transition: background-color 160ms ease, color 160ms ease, border-color 160ms ease;
 }
 
 .site-nav a:hover,
@@ -27,21 +33,25 @@
   color: #087e8b;
 }
 
-.site-nav a:focus-visible {
+.site-nav a:focus-visible,
+.site-nav button.nav-login:focus-visible,
+.site-nav button.nav-signup:focus-visible {
   outline: 2px solid #0b8793;
   outline-offset: 2px;
-  border-radius: 0.4rem;
+  border-radius: 999px;
 }
 
-/* Sign In and Sign Up Buttons */
+/* Pill Action Buttons (Log In, Sign Up, My Portal, Log Out) */
 
 .site-nav .nav-login,
 .site-nav .nav-signup {
-  min-height: 2.75rem;
-  padding: 0.65rem 1.1rem;
+  height: 2.55rem;
+  padding: 0 1.15rem;
+  border: 0;
   border-radius: 999px;
   background: #111;
   color: #fff;
+  cursor: pointer;
   font-weight: 600;
   text-decoration: none;
 }
@@ -57,8 +67,8 @@
 /* Dropdown Menu */
 
 .site-nav .nav-dropdown {
-  min-height: 2.75rem;
-  padding: 0.55rem 1rem;
+  height: 2.55rem;
+  padding: 0 1rem;
   border: 1px solid #d5d9df;
   border-radius: 999px;
 }
@@ -78,7 +88,7 @@
 
 .dropdown-options {
   position: absolute;
-  z-index: 2;
+  z-index: 10;
   top: calc(100% + 0.65rem);
   left: 0;
   display: none;
@@ -102,9 +112,9 @@
   content: '';
 }
 
-.nav-dropdown-menu:hover > .dropdown-options,
-.nav-dropdown-menu:focus-within > .dropdown-options,
-.nav-dropdown-menu[open] > .dropdown-options {
+.nav-dropdown-menu:hover>.dropdown-options,
+.nav-dropdown-menu:focus-within>.dropdown-options,
+.nav-dropdown-menu[open]>.dropdown-options {
   display: block;
 }
 
@@ -123,7 +133,7 @@
   color: inherit;
   cursor: pointer;
   font: inherit;
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   text-align: left;
   white-space: nowrap;
 }
@@ -144,9 +154,9 @@
 }
 
 .dropdown-icon {
-  width: 0.48rem;
-  height: 0.48rem;
-  margin-top: -0.22rem;
+  width: 0.45rem;
+  height: 0.45rem;
+  margin-top: -0.2rem;
   border-right: 1.5px solid currentColor;
   border-bottom: 1.5px solid currentColor;
   transform: rotate(45deg);
@@ -155,22 +165,22 @@
 /* Search Bar */
 
 .nav-search {
-  flex: 0 0 19rem;
-  min-width: 0;
+  flex: 0 1 15.5rem;
+  min-width: 10rem;
   margin: 0;
 }
 
 .nav-search input {
   width: 100%;
   box-sizing: border-box;
-  height: 2.75rem;
+  height: 2.55rem;
   padding: 0 1rem;
   border: 1px solid #d5d9df;
   border-radius: 999px;
   background: #fff;
   color: #17202a;
   font: inherit;
-  font-size: 0.87rem;
+  font-size: 0.86rem;
 }
 
 .nav-search input::placeholder {
@@ -186,13 +196,13 @@
 
 /* Responsive Navigation */
 
-@media (max-width: 980px) {
+@media (max-width: 1080px) {
   .site-nav {
     justify-content: flex-start;
     flex-wrap: wrap;
   }
 
   .nav-search {
-    flex: 1 1 18rem;
+    flex: 1 1 16rem;
   }
 }

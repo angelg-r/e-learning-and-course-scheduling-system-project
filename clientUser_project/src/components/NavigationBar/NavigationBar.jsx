@@ -1,10 +1,12 @@
-
 import './NavigationBar.css'
 import { useState } from 'react'
-import { NavLink } from 'react-router'
+import { NavLink, useNavigate } from 'react-router'
+import { getPortalPath, useAuth } from '../../context/authUtils'
 
 function NavigationBar() {
   const [selectedTrainingMode, setSelectedTrainingMode] = useState('')
+  const { user, logoutUser } = useAuth()
+  const navigate = useNavigate()
 
   const trainingModes = [
     'Office Training',
@@ -25,10 +27,13 @@ function NavigationBar() {
     }
   }
 
+  const handleLogout = () => {
+    logoutUser()
+    navigate('/goodrespondertraininginstitute/login')
+  }
+
   return (
     <nav className="site-nav" aria-label="Main navigation">
-
-      {/* All Courses */}
       <details
         className="nav-dropdown-menu"
         onPointerEnter={openMenuOnMouseEnter}
@@ -48,7 +53,6 @@ function NavigationBar() {
         </ul>
       </details>
 
-      {/* Search Courses */}
       <form
         className="nav-search"
         role="search"
@@ -61,7 +65,6 @@ function NavigationBar() {
         />
       </form>
 
-      {/* Training Modes */}
       <details
         className="nav-dropdown-menu"
         onPointerEnter={openMenuOnMouseEnter}
@@ -87,27 +90,33 @@ function NavigationBar() {
         </ul>
       </details>
 
-      {/* Contact Us */}
       <NavLink to="/goodrespondertraininginstitute/contact">
         Contact Us
       </NavLink>
 
-      {/* Log In */}
-      <NavLink
-        to="/goodrespondertraininginstitute/login"
-        className="nav-login"
-      >
-        Log In
-      </NavLink>
-
-      {/* Sign Up */}
-      <NavLink
-        to="/goodrespondertraininginstitute/register"
-        className="nav-signup"
-      >
-        Sign Up
-      </NavLink>
-
+      {user ? (
+        <>
+          <NavLink to={getPortalPath(user.role)} className="nav-login">
+            My Portal
+          </NavLink>
+          <button
+            type="button"
+            className="nav-signup"
+            onClick={handleLogout}
+          >
+            Log Out
+          </button>
+        </>
+      ) : (
+        <>
+          <NavLink to="/goodrespondertraininginstitute/login" className="nav-login">
+            Log In
+          </NavLink>
+          <NavLink to="/goodrespondertraininginstitute/register" className="nav-signup">
+            Sign Up
+          </NavLink>
+        </>
+      )}
     </nav>
   )
 }
