@@ -7,6 +7,7 @@ export default function OnlineReservation() {
   const [scheduleId, setScheduleId] = useState('')
   const [trainingMode, setTrainingMode] = useState('Office Training')
   const [notes, setNotes] = useState('')
+  const [activeSlip, setActiveSlip] = useState(null)
   const [notice, setNotice] = useState('')
   const [error, setError] = useState('')
 
@@ -35,7 +36,8 @@ export default function OnlineReservation() {
       })
       setReservations((prev) => [data.reservation, ...prev])
       setNotes('')
-      setNotice('Reservation saved to database!')
+      setNotice('Reservation saved! Your booking transaction slip is ready.')
+      setActiveSlip(data.reservation)
     } catch (err) {
       setError(err.message)
     }
@@ -56,7 +58,7 @@ export default function OnlineReservation() {
   return (
     <section className="module-container">
       <h1>Online Plotting &amp; Reservation</h1>
-      <p className="portal-subtitle">Reserve your slot in an active training schedule.</p>
+      <p className="portal-subtitle">Reserve your slot in an active training schedule and view your booking slip.</p>
 
       {notice && <p className="portal-notice" role="status">{notice}</p>}
       {error && <p className="portal-notice portal-notice-error" role="alert">{error}</p>}
@@ -98,6 +100,7 @@ export default function OnlineReservation() {
         <table className="portal-table">
           <thead>
             <tr>
+              <th>Booking Ref</th>
               <th>Course &amp; Schedule</th>
               <th>Venue</th>
               <th>Mode</th>
@@ -107,9 +110,10 @@ export default function OnlineReservation() {
           </thead>
           <tbody>
             {reservations.length === 0 ? (
-              <tr><td colSpan={5}>No reservations yet.</td></tr>
+              <tr><td colSpan={6}>No reservations yet.</td></tr>
             ) : reservations.map((r) => (
               <tr key={r._id}>
+                <td><strong>{r.referenceCode || '—'}</strong></td>
                 <td><strong>{r.schedule?.course?.title}</strong> — {r.schedule?.date} ({r.schedule?.slot})</td>
                 <td>{r.schedule?.venue?.name}</td>
                 <td>{r.trainingMode}</td>
@@ -118,7 +122,10 @@ export default function OnlineReservation() {
                     {r.status}
                   </span>
                 </td>
-                <td>
+                <td className="portal-actions-cell">
+                  <button type="button" className="portal-btn portal-btn-sm portal-btn-secondary" onClick={() => setActiveSlip(r)}>
+                    View Slip
+                  </button>
                   {r.status !== 'Cancelled' && (
                     <button type="button" className="portal-btn portal-btn-sm portal-btn-danger" onClick={() => handleCancel(r._id)}>
                       Cancel
@@ -130,6 +137,60 @@ export default function OnlineReservation() {
           </tbody>
         </table>
       </div>
+
+      {activeSlip && (
+        <div className="portal-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="slip-title">
+          <div className="portal-modal-card">
+            <div className="portal-modal-header">
+              <h2 id="slip-title">GRTI Booking Transaction Slip</h2>
+              <button
+                type="button"
+                className="portal-btn portal-btn-sm portal-btn-secondary"
+                onClick={() => setActiveSlip(null)}
+              >
+                Close
+              </button>
+            </div>
+            <p className="portal-subtitle">
+              View-only transaction summary. Please present this reference code at the GRTI branch to settle fees and confirm your slot.
+            </p>
+            <dl className="portal-slip-grid">
+              <div>
+                <dt>Transaction Reference</dt>
+                <dd><strong>{activeSlip.referenceCode || 'Pending Ref'}</strong></dd>
+              </div>
+              <div>
+                <dt>Status</dt>
+                <dd>{activeSlip.status}</dd>
+              </div>
+              <div>
+                <dt>Course</dt>
+                <dd>{activeSlip.schedule?.course?.title || '—'}</dd>
+              </div>
+              <div>
+                <dt>Schedule</dt>
+                <dd>{activeSlip.schedule ? `${activeSlip.schedule.date} (${activeSlip.schedule.slot})` : '—'}</dd>
+              </div>
+              <div>
+                <dt>Venue</dt>
+                <dd>{activeSlip.schedule?.venue?.name || '—'}</dd>
+              </div>
+              <div>
+                <dt>Training Mode</dt>
+                <dd>{activeSlip.trainingMode}</dd>
+              </div>
+            </dl>
+            <div className="portal-form-actions">
+              <button type="button" className="portal-btn" onClick={() => window.print()}>
+                Print Slip
+              </button>
+              <button type="button" className="portal-btn portal-btn-secondary" onClick={() => setActiveSlip(null)}>
+                Done
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   )
 }

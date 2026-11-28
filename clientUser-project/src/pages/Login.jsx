@@ -69,7 +69,7 @@ function Login() {
                 <div className="auth-form-panel">
                     <p className="auth-eyebrow">Portal Access</p>
                     <h2 id="login-heading" className="auth-heading">Welcome Back</h2>
-                    <p className="auth-intro">Sign in with your trainee, trainor, or admin account.</p>
+                    <p className="auth-intro">Sign in with your created account.</p>
 
                     <form className="auth-form" onSubmit={handleSubmit}>
                         <div className="auth-field">

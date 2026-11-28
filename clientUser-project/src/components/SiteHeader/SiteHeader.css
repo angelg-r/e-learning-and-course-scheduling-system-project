@@ -2,9 +2,11 @@
     position: sticky;
     top: 0;
     z-index: 50;
-    background: var(--cream);
-    border-bottom: 1px solid var(--beige);
-    box-shadow: 0 2px 12px rgba(60, 68, 27, 0.08);
+    background: rgba(253, 246, 228, 0.82);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(60, 68, 27, 0.12);
+    box-shadow: 0 4px 24px rgba(60, 68, 27, 0.06);
 }
 
 .site-header-inner {

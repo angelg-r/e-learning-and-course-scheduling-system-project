@@ -15,6 +15,7 @@ export default function ReservationManagement() {
   }, [])
 
   const updateStatus = async (id, status) => {
+    setError('')
     try {
       await apiFetch(`/api/reservations/${id}/status`, {
         method: 'PATCH',
@@ -31,7 +32,7 @@ export default function ReservationManagement() {
   return (
     <section className="module-container">
       <h1>Reservation Management</h1>
-      <p className="portal-subtitle">Confirm or cancel trainee schedule reservations in MongoDB.</p>
+      <p className="portal-subtitle">Confirm or cancel trainee schedule reservations after branch verification.</p>
       {error && <p className="portal-notice portal-notice-error">{error}</p>}
 
       <div className="portal-toolbar">
@@ -47,6 +48,7 @@ export default function ReservationManagement() {
         <table className="portal-table">
           <thead>
             <tr>
+              <th>Booking Ref</th>
               <th>Trainee</th>
               <th>Course</th>
               <th>Schedule</th>
@@ -57,9 +59,10 @@ export default function ReservationManagement() {
           </thead>
           <tbody>
             {rows.length === 0 ? (
-              <tr><td colSpan={6}>No reservations found.</td></tr>
+              <tr><td colSpan={7}>No reservations found.</td></tr>
             ) : rows.map((r) => (
               <tr key={r._id}>
+                <td><strong>{r.referenceCode || '—'}</strong></td>
                 <td><strong>{r.trainee?.fullName}</strong></td>
                 <td>{r.schedule?.course?.title}</td>
                 <td>{r.schedule ? `${r.schedule.date} (${r.schedule.slot})` : '—'}</td>

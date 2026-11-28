@@ -16,6 +16,7 @@ const courseSchema = new mongoose.Schema({
         default: "Office Training"
     },
     modulesCount: { type: Number, default: 1, min: 1 },
+    price: { type: Number, default: 0, min: 0 },
     materials: [materialSchema]
 }, { timestamps: true });
 

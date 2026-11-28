@@ -16,6 +16,7 @@ import TraineeDashboard from './modules/Trainee/Dashboard/TraineeDashboard'
 import ELearningPortal from './modules/Trainee/ELearningPortal/ELearningPortal'
 import ScheduleViewer from './modules/Trainee/ScheduleViewer/ScheduleViewer'
 import OnlineReservation from './modules/Trainee/OnlineReservation/OnlineReservation'
+import Simulator3D from './modules/Trainee/Simulator3D/Simulator3D'
 
 // Client Side: Trainor Modules
 import TrainorProfile from './modules/Trainor/AuthProfile/TrainorProfile'
@@ -43,6 +44,7 @@ const roleRoutes = [
     children: [
       { path: 'dashboard', label: 'Dashboard', element: <TraineeDashboard /> },
       { path: 'portal', label: 'E-Learning Portal', element: <ELearningPortal /> },
+      { path: 'simulator', label: '3D Simulator', element: <Simulator3D /> },
       { path: 'schedules', label: 'Schedule Viewer', element: <ScheduleViewer /> },
       { path: 'reservations', label: 'Online Reservation', element: <OnlineReservation /> },
       { path: 'profile', label: 'Profile & Account', element: <TraineeProfile /> },
@@ -118,6 +120,9 @@ function App() {
                   {children.map(({ path, element }) => (
                     <Route key={path} path={path} element={element} />
                   ))}
+                  {role === 'trainee' && (
+                    <Route path="portal/simulator/:courseId" element={<Simulator3D />} />
+                  )}
                 </Route>
               </Route>
             ))}

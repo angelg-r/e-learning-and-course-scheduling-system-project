@@ -1,3 +1,4 @@
+const crypto = require("crypto");
 const express = require("express");
 const mongoose = require("mongoose");
 const Reservation = require("../models/Reservation");
@@ -9,6 +10,12 @@ const { notifyUser } = require("../utils/notifications");
 const router = express.Router();
 const ALLOWED_STATUSES = ["Pending", "Confirmed", "Cancelled"];
 const ALLOWED_ATTENDANCE = ["Pending", "Present", "Absent"];
+
+function generateReferenceCode() {
+    const datePart = new Date().toISOString().slice(0, 10).replace(/-/g, "");
+    const randPart = crypto.randomBytes(2).toString("hex").toUpperCase();
+    return `GRTI-${datePart}-${randPart}`;
+}
 
 router.get("/", verifyToken, async (req, res) => {
     try {
@@ -68,6 +75,7 @@ router.post("/", verifyToken, requireRole("trainee", "admin"), async (req, res) 
         }
 
         const created = await Reservation.create({
+            referenceCode: generateReferenceCode(),
             trainee: req.user.id,
             schedule: scheduleId,
             trainingMode: typeof trainingMode === "string" ? trainingMode.trim() : undefined,
@@ -88,8 +96,8 @@ router.post("/", verifyToken, requireRole("trainee", "admin"), async (req, res) 
         await notifyUser({
             user: populated.trainee,
             event: "reservation_created",
-            subject: `GRTI Reservation Received: ${populated.schedule?.course?.title || "Training"}`,
-            message: `Hi ${populated.trainee?.fullName || "Trainee"}, your reservation for ${populated.schedule?.course?.title || "training"} on ${populated.schedule?.date} (${populated.schedule?.slot}) is currently Pending.`
+            subject: `GRTI Reservation Slip (${populated.referenceCode})`,
+            message: `Hi ${populated.trainee?.fullName || "Trainee"}, your reservation ${populated.referenceCode} for ${populated.schedule?.course?.title || "training"} on ${populated.schedule?.date} (${populated.schedule?.slot}) is Pending. Present your reference code at GRTI to confirm your slot.`
         });
 
         res.status(201).json({ reservation: populated });
@@ -128,8 +136,8 @@ router.patch("/:id/status", verifyToken, validateObjectId("id"), async (req, res
         await notifyUser({
             user: reservation.trainee,
             event: "reservation_status_update",
-            subject: `GRTI Reservation ${nextStatus}: ${reservation.schedule?.course?.title || "Training"}`,
-            message: `Hi ${reservation.trainee?.fullName || "Trainee"}, your reservation for ${reservation.schedule?.course?.title || "training"} on ${reservation.schedule?.date} (${reservation.schedule?.slot}) at ${reservation.schedule?.venue?.name || "GRTI"} is now ${nextStatus}.`
+            subject: `GRTI Reservation ${nextStatus} (${reservation.referenceCode || ""})`,
+            message: `Hi ${reservation.trainee?.fullName || "Trainee"}, your reservation ${reservation.referenceCode || ""} for ${reservation.schedule?.course?.title || "training"} on ${reservation.schedule?.date} (${reservation.schedule?.slot}) at ${reservation.schedule?.venue?.name || "GRTI"} is now ${nextStatus}.`
         });
 
         res.json({ reservation });

@@ -16,7 +16,7 @@ router.get("/", verifyToken, async (_req, res) => {
 
 router.post("/", verifyToken, requireRole("admin"), async (req, res) => {
     try {
-        const { code, title, trainingMode, modulesCount } = req.body;
+        const { code, title, trainingMode, modulesCount, price } = req.body;
         if (!isNonEmptyString(code, 40) || !isNonEmptyString(title, 150)) {
             return res.status(400).json({ message: "Course code and title are required." });
         }
@@ -25,7 +25,8 @@ router.post("/", verifyToken, requireRole("admin"), async (req, res) => {
             code: code.trim(),
             title: title.trim(),
             trainingMode: typeof trainingMode === "string" ? trainingMode.trim() : undefined,
-            modulesCount: Number.isFinite(Number(modulesCount)) ? Number(modulesCount) : undefined
+            modulesCount: Number.isFinite(Number(modulesCount)) ? Number(modulesCount) : undefined,
+            price: Number.isFinite(Number(price)) && Number(price) >= 0 ? Number(price) : 0
         });
         res.status(201).json({ course });
     } catch (error) {
@@ -43,7 +44,7 @@ router.delete("/:id", verifyToken, requireRole("admin"), validateObjectId("id"),
     }
 });
 
-router.post("/:id/materials", verifyToken, requireRole("admin", "trainor"), validateObjectId("id"), async (req, res) => {
+router.post("/:id/materials", verifyToken, requireRole("admin"), validateObjectId("id"), async (req, res) => {
     try {
         const { title, format, link } = req.body;
         if (!isNonEmptyString(title, 150) || !isSafeUrl(link)) {
@@ -69,7 +70,7 @@ router.post("/:id/materials", verifyToken, requireRole("admin", "trainor"), vali
 router.delete(
     "/:id/materials/:materialId",
     verifyToken,
-    requireRole("admin", "trainor"),
+    requireRole("admin"),
     validateObjectId("id", "materialId"),
     async (req, res) => {
         try {
