@@ -1,3 +1,21 @@
+:root {
+  --sage: #9DA360;
+  --cream: #FDF6E4;
+  --olive: #3C441B;
+  --olive-dark: #2d3313;
+  --beige: #DFD3A5;
+  --surface: #fffdf7;
+  --border-warm: #d5c795;
+  --text-muted: #5b6342;
+
+  --font-sans: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+  --text-xs: 0.75rem;
+  --text-sm: 0.875rem;
+  --text-base: 0.95rem;
+  --text-lg: 1.125rem;
+  --text-xl: 1.5rem;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -6,10 +24,20 @@ body {
   margin: 0;
   min-width: 320px;
   min-height: 100vh;
-  background: #fff;
-  color: #263b4d;
-  font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
+  background: var(--cream);
+  color: var(--olive);
+  font-family: var(--font-sans);
+  font-size: var(--text-base);
+  line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+}
+
+button,
+input,
+select,
+textarea {
+  font-family: var(--font-sans);
+  font-size: var(--text-sm);
 }
 
 button,

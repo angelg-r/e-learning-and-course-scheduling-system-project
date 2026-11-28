@@ -1,0 +1,134 @@
+.plotter-calendar-card {
+  margin-top: 16px;
+  padding: 16px;
+  border: 1px solid var(--border-warm);
+  border-radius: 10px;
+  background: var(--surface);
+}
+
+.plotter-calendar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+  gap: 12px;
+}
+
+.plotter-calendar-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--olive);
+}
+
+.plotter-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.plotter-calendar-weekday {
+  text-align: center;
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  padding: 4px 0;
+}
+
+.plotter-calendar-day {
+  min-height: 46px;
+  padding: 6px 4px;
+  border: 1px solid var(--beige);
+  border-radius: 8px;
+  background: var(--cream);
+  color: var(--olive);
+  font-size: 0.88rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  transition: transform 0.1s ease, border-color 0.15s ease;
+}
+
+.plotter-calendar-day:hover:not(:disabled) {
+  border-color: var(--olive);
+  background: var(--beige);
+}
+
+.plotter-calendar-day.is-empty {
+  background: transparent;
+  border-color: transparent;
+  cursor: default;
+}
+
+.plotter-calendar-day.is-selected {
+  background: var(--olive);
+  color: var(--cream);
+  border-color: var(--olive);
+}
+
+.plotter-calendar-day.is-pending {
+  background: var(--beige);
+  border-color: var(--sage);
+  color: var(--olive);
+}
+
+.plotter-calendar-day.is-unavailable {
+  background: #fee2e2;
+  border-color: #dc2626;
+  color: #b91c1c;
+  font-weight: 700;
+}
+
+.plotter-calendar-day.is-unavailable:disabled {
+  cursor: not-allowed;
+  opacity: 0.92;
+}
+
+.plotter-calendar-tag {
+  font-size: 0.62rem;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.plotter-calendar-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 12px;
+  font-size: 0.82rem;
+  color: var(--olive);
+}
+
+.plotter-legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.plotter-legend-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 3px;
+  display: inline-block;
+  border: 1px solid transparent;
+}
+
+.plotter-legend-red {
+  background: #fee2e2;
+  border-color: #dc2626;
+}
+
+.plotter-legend-amber {
+  background: var(--beige);
+  border-color: var(--sage);
+}
+
+.plotter-legend-selected {
+  background: var(--olive);
+  border-color: var(--olive);
+}

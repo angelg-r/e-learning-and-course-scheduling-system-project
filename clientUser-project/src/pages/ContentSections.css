@@ -46,18 +46,18 @@
 }
 
 .content-section--black {
-    background: #111;
-    color: #fff;
+    background: var(--olive);
+    color: var(--cream);
 }
 
 .content-section--white {
-    background: #fff;
-    color: #111;
+    background: var(--cream);
+    color: var(--olive);
 }
 
 .content-section--gray {
-    background: #707070;
-    color: #fff;
+    background: var(--sage);
+    color: var(--cream);
 }
 
 .home-training-options {
@@ -90,8 +90,8 @@
 
 .home-contact-link:hover,
 .home-contact-link:focus-visible {
-    background: #fff;
-    color: #111;
+    background: var(--beige);
+    color: var(--olive);
 }
 
 .home-contact-link:focus-visible {

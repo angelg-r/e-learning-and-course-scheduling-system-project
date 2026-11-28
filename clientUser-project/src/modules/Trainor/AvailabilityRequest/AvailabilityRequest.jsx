@@ -90,7 +90,11 @@ export default function AvailabilityRequest() {
                 <td>{r.date}</td>
                 <td>{r.slot}</td>
                 <td>{r.reason}</td>
-                <td><span className="portal-badge portal-badge-warning">{r.status}</span></td>
+                <td>
+                  <span className={`portal-badge ${r.status === 'Approved' ? 'portal-badge-success' : r.status === 'Declined' ? 'portal-badge-neutral' : 'portal-badge-warning'}`}>
+                    {r.status}
+                  </span>
+                </td>
                 <td>
                   <button type="button" className="portal-btn portal-btn-sm portal-btn-danger" onClick={() => handleDelete(r._id)}>
                     Delete

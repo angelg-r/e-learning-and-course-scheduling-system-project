@@ -6,22 +6,22 @@
 
 .login-eyebrow {
     margin: 0 0 0.75rem;
-    color: #087e8b;
+    color: var(--sage);
     font-size: 0.8rem;
-    font-weight: 650;
+    font-weight: 700;
     text-transform: uppercase;
 }
 
 .login-page h2 {
     margin: 0;
-    color: #111;
+    color: var(--olive);
     font-size: clamp(2.5rem, 7vw, 4rem);
     line-height: 1.1;
 }
 
 .login-intro {
     margin: 1rem 0 2rem;
-    color: #475569;
+    color: var(--text-muted);
 }
 
 .login-form {
@@ -31,7 +31,7 @@
 
 .login-form label {
     margin-top: 0.75rem;
-    color: #17202a;
+    color: var(--olive);
     font-size: 0.9rem;
     font-weight: 600;
 }
@@ -40,16 +40,16 @@
     width: 100%;
     min-height: 2.9rem;
     padding: 0.65rem 0.8rem;
-    border: 1px solid #cbd2d9;
+    border: 1px solid var(--border-warm);
     border-radius: 0.3rem;
-    background: #fff;
-    color: #111;
+    background: var(--surface);
+    color: var(--olive);
     font: inherit;
 }
 
 .login-form input:focus-visible {
-    border-color: #087e8b;
-    outline: 2px solid #087e8b;
+    border-color: var(--olive);
+    outline: 2px solid var(--sage);
     outline-offset: 2px;
 }
 
@@ -58,8 +58,8 @@
     margin-top: 1rem;
     border: 0;
     border-radius: 999px;
-    background: #111;
-    color: #fff;
+    background: var(--olive);
+    color: var(--cream);
     cursor: pointer;
     font: inherit;
     font-weight: 600;
@@ -67,16 +67,17 @@
 
 .login-form button:hover,
 .login-form button:focus-visible {
-    background: #087e8b;
+    background: var(--sage);
+    color: var(--olive);
 }
 
 .login-form button:focus-visible {
-    outline: 2px solid #087e8b;
+    outline: 2px solid var(--olive);
     outline-offset: 3px;
 }
 
 .login-notice {
     margin: 1rem 0 0;
-    color: #64748b;
+    color: var(--text-muted);
     font-size: 0.85rem;
 }

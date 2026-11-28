@@ -1,12 +1,14 @@
 import { useState } from 'react'
-import { useNavigate } from 'react-router'
+import { Link, useNavigate } from 'react-router'
 import { getPortalPath, useAuth } from '../context/authUtils'
 import { API_URL } from '../config/api'
-import './Login.css'
+import './AuthPages.css'
 
 function Login() {
     const [notice, setNotice] = useState('')
+    const [isError, setIsError] = useState(false)
     const [loading, setLoading] = useState(false)
+    const [showPassword, setShowPassword] = useState(false)
     const { loginUser } = useAuth()
     const navigate = useNavigate()
 
@@ -19,6 +21,7 @@ function Login() {
 
         setLoading(true)
         setNotice('')
+        setIsError(false)
 
         try {
             const response = await fetch(`${API_URL}/api/auth/login`, {
@@ -38,6 +41,7 @@ function Login() {
             loginUser(data.user, data.token)
             navigate(getPortalPath(data.user?.role))
         } catch (error) {
+            setIsError(true)
             setNotice(error.message || 'Unable to connect to the server.')
         } finally {
             setLoading(false)
@@ -45,38 +49,81 @@ function Login() {
     }
 
     return (
-        <section className="login-page" aria-labelledby="login-heading">
-            <p className="login-eyebrow">Good Responder Training Institute</p>
-            <h2 id="login-heading">Log In</h2>
-            <p className="login-intro">Use your account details to continue.</p>
+        <section className="auth-shell" aria-labelledby="login-heading">
+            <div className="auth-card">
+                <div className="auth-aside">
+                    <div>
+                        <span className="auth-aside-badge">GRTI Training Portal</span>
+                        <h1 className="auth-aside-title">Good Responder Training Institute</h1>
+                        <p className="auth-aside-copy">
+                            Access self-paced certification modules, view live training schedules, and manage your reservations in one place.
+                        </p>
+                    </div>
+                    <ul className="auth-aside-features">
+                        <li>Self-Paced E-Learning</li>
+                        <li>Online Slot Reservation</li>
+                        <li>SMS &amp; Email Updates</li>
+                    </ul>
+                </div>
 
-            <form className="login-form" onSubmit={handleSubmit}>
-                <label htmlFor="login-email">Email</label>
-                <input
-                    id="login-email"
-                    name="email"
-                    type="email"
-                    autoComplete="username"
-                    required
-                />
+                <div className="auth-form-panel">
+                    <p className="auth-eyebrow">Portal Access</p>
+                    <h2 id="login-heading" className="auth-heading">Welcome Back</h2>
+                    <p className="auth-intro">Sign in with your trainee, trainor, or admin account.</p>
 
-                <label htmlFor="login-password">Password</label>
-                <input
-                    id="login-password"
-                    name="password"
-                    type="password"
-                    autoComplete="current-password"
-                    required
-                />
+                    <form className="auth-form" onSubmit={handleSubmit}>
+                        <div className="auth-field">
+                            <label htmlFor="login-email">Email Address</label>
+                            <input
+                                id="login-email"
+                                name="email"
+                                type="email"
+                                placeholder="name@example.com"
+                                autoComplete="username"
+                                required
+                            />
+                        </div>
 
-                <button type="submit" disabled={loading}>
-                    {loading ? 'Logging in...' : 'Log in'}
-                </button>
-            </form>
+                        <div className="auth-field">
+                            <label htmlFor="login-password">Password</label>
+                            <div className="auth-input-wrap">
+                                <input
+                                    id="login-password"
+                                    name="password"
+                                    type={showPassword ? 'text' : 'password'}
+                                    placeholder="Enter your password"
+                                    autoComplete="current-password"
+                                    required
+                                />
+                                <button
+                                    type="button"
+                                    className="auth-pw-toggle"
+                                    onClick={() => setShowPassword((prev) => !prev)}
+                                >
+                                    {showPassword ? 'Hide' : 'Show'}
+                                </button>
+                            </div>
+                        </div>
 
-            <p className="login-notice" role="status">
-                {notice}
-            </p>
+                        <button type="submit" className="auth-submit-btn" disabled={loading}>
+                            {loading ? 'Logging in...' : 'Log In'}
+                        </button>
+                    </form>
+
+                    {notice && (
+                        <p className={`auth-notice ${isError ? 'is-error' : ''}`} role="status">
+                            {notice}
+                        </p>
+                    )}
+
+                    <p className="auth-switch-link">
+                        New to GRTI?{' '}
+                        <Link to="/goodrespondertraininginstitute/register">
+                            Create a Trainee Account
+                        </Link>
+                    </p>
+                </div>
+            </div>
         </section>
     )
 }

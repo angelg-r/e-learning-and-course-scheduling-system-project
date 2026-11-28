@@ -4,15 +4,17 @@ import { apiFetch } from '../../../config/api'
 export default function TraineeDashboard() {
   const [courses, setCourses] = useState([])
   const [reservations, setReservations] = useState([])
+  const [completedCourses, setCompletedCourses] = useState(0)
   const [error, setError] = useState('')
 
   useEffect(() => {
     let active = true
-    Promise.all([apiFetch('/api/courses'), apiFetch('/api/reservations')])
-      .then(([courseRes, resRes]) => {
+    Promise.all([apiFetch('/api/courses'), apiFetch('/api/reservations'), apiFetch('/api/progress')])
+      .then(([courseRes, resRes, progRes]) => {
         if (!active) return
         setCourses(courseRes.courses || [])
         setReservations(resRes.reservations || [])
+        setCompletedCourses((progRes.progress || []).filter((p) => p.completed).length)
       })
       .catch((err) => { if (active) setError(err.message) })
     return () => { active = false }
@@ -24,13 +26,17 @@ export default function TraineeDashboard() {
   return (
     <section className="module-container">
       <h1>Trainee Dashboard</h1>
-      <p className="portal-subtitle">Overview of available courses and your reserved schedules.</p>
+      <p className="portal-subtitle">Overview of available courses, learning progress, and your reserved schedules.</p>
       {error && <p className="portal-notice portal-notice-error">{error}</p>}
 
       <div className="portal-stats">
         <div className="portal-stat-card">
           <span className="portal-stat-label">Available Courses</span>
           <span className="portal-stat-value">{courses.length}</span>
+        </div>
+        <div className="portal-stat-card">
+          <span className="portal-stat-label">Completed Courses</span>
+          <span className="portal-stat-value">{completedCourses}</span>
         </div>
         <div className="portal-stat-card">
           <span className="portal-stat-label">Active Reservations</span>

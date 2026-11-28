@@ -1,4 +1,5 @@
 const jwt = require("jsonwebtoken");
+const mongoose = require("mongoose");
 
 function verifyToken(req, res, next) {
     const header = req.headers.authorization || "";
@@ -9,7 +10,11 @@ function verifyToken(req, res, next) {
     }
 
     try {
-        req.user = jwt.verify(token, process.env.JWT_SECRET);
+        const decoded = jwt.verify(token, process.env.JWT_SECRET);
+        if (!decoded?.id || !mongoose.isValidObjectId(decoded.id)) {
+            return res.status(401).json({ message: "Invalid token payload." });
+        }
+        req.user = decoded;
         next();
     } catch {
         return res.status(401).json({ message: "Invalid or expired token." });
@@ -17,9 +22,10 @@ function verifyToken(req, res, next) {
 }
 
 function requireRole(...allowedRoles) {
+    const normalized = allowedRoles.map((r) => r.toLowerCase());
     return (req, res, next) => {
         const role = (req.user?.role || "").toLowerCase();
-        if (!allowedRoles.includes(role)) {
+        if (!normalized.includes(role)) {
             return res.status(403).json({ message: "Forbidden: insufficient permissions." });
         }
         next();
